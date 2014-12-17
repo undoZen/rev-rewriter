@@ -1,6 +1,6 @@
 {
   "name": "rev-rewriter",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "input revMap and string, output string replaced based on revMap",
   "main": "index.js",
   "scripts": {
