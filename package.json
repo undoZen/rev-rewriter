@@ -1,0 +1,25 @@
+{
+  "name": "rev-rewriter",
+  "version": "0.0.0",
+  "description": "input revMap and string, output string replaced based on revMap",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/undoZen/rev-rewriter.git"
+  },
+  "keywords": [
+    "rev"
+  ],
+  "author": "undoZen <opensource@undozen.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/undoZen/rev-rewriter/issues"
+  },
+  "homepage": "https://github.com/undoZen/rev-rewriter",
+  "devDependencies": {
+    "tape": "^3.0.3"
+  }
+}
