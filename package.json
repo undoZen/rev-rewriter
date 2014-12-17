@@ -4,7 +4,7 @@
   "description": "input revMap and string, output string replaced based on revMap",
   "main": "index.js",
   "scripts": {
-    "test": "tape"
+    "test": "tape test/*.js"
   },
   "repository": {
     "type": "git",
