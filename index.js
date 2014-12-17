@@ -9,10 +9,10 @@ function escapeRegExp(string) {
 function rewrite(opts, contents) {
     var revMap = opts.revMap || {};
     var assetPathPrefix = opts.assetPathPrefix || '/assets/';
-    var revPost = typeof opts.revPost === 'function' ?
-        opts.revPost : function (p) {
-            return p;
-        };
+    var revPost = typeof opts.revPost === 'function' ? opts.revPost : identity;
+    function identity(p) {
+        return p;
+    }
     /*
      * copy from broccoli-assets-rewrite with some modification
      *
@@ -52,7 +52,10 @@ function rewrite(opts, contents) {
         if (revMap[filePath]) {
             return left + revPost(revMap[filePath]) + (search || '') +
                 right;
+        } else if (revPost !== identity) {
+            return left + revPost(filePath) + (search || '') + right;
+        } else {
+            return all;
         }
-        return all;
     });
 }

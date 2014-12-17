@@ -32,7 +32,7 @@ tape('replace with revMap and assetPathPrefix and leading slash', function (t) {
     t.equal(result, '<script src="/b.js"></script>');
 });
 
-tape('well all options setted', function (t) {
+tape('with all options set', function (t) {
     t.plan(1);
     var original = '<script src="/static/a.js"></script>';
     var result = rewrite({
@@ -45,4 +45,16 @@ tape('well all options setted', function (t) {
         }
     }, original);
     t.equal(result, '<script src="/assets/b.js"></script>');
+});
+
+tape('no need to match in revMap, revPost still apply', function (t) {
+    t.plan(1);
+    var original = '<script src="/static/a.js"></script>';
+    var result = rewrite({
+        assetPathPrefix: '/static',
+        revPost: function(revvedFilePath) {
+            return '/assets' + revvedFilePath;
+        }
+    }, original);
+    t.equal(result, '<script src="/assets/a.js"></script>');
 });
