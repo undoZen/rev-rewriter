@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = rewrite;
+module.exports.escapeRegExp = escapeRegExp;
 
 function escapeRegExp(string) {
     return string.replace(/([.*+?^${}()|\[\]\/\\])/g, "\\$1");
