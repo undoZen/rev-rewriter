@@ -11,7 +11,7 @@ function rewrite(opts, contents) {
     var revMap = opts.revMap || {};
     var assetPathPrefix = opts.assetPathPrefix || '/assets/';
     var revPost = typeof opts.revPost === 'function' ? opts.revPost : identity;
-    function identity(p) {
+    function identity(p, rewritten) {
         return p;
     }
     /*
@@ -51,10 +51,10 @@ function rewrite(opts, contents) {
             filePath = filePath.substring(0, index);
         }
         if (revMap[filePath]) {
-            return left + revPost(revMap[filePath]) + (search || '') +
+            return left + revPost(revMap[filePath], true) + (search || '') +
                 right;
         } else if (revPost !== identity) {
-            return left + revPost(filePath) + (search || '') + right;
+            return left + revPost(filePath, false) + (search || '') + right;
         } else {
             return all;
         }
