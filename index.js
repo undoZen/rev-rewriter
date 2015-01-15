@@ -6,14 +6,15 @@ module.exports.escapeRegExp = escapeRegExp;
 function escapeRegExp(string) {
     return string.replace(/([.*+?^${}()|\[\]\/\\])/g, "\\$1");
 }
+function identity(p, rewritten) {
+    return p;
+}
 
 function rewrite(opts, contents) {
     var revMap = opts.revMap || {};
     var assetPathPrefix = opts.assetPathPrefix || '/assets/';
     var revPost = typeof opts.revPost === 'function' ? opts.revPost : identity;
-    function identity(p, rewritten) {
-        return p;
-    }
+    var revPre = typeof opts.revPre === 'function' ? opts.revPre : identity;
     /*
      * copy from broccoli-assets-rewrite with some modification
      *
@@ -50,6 +51,7 @@ function rewrite(opts, contents) {
             search = filePath.substring(index);
             filePath = filePath.substring(0, index);
         }
+        filePath = revPre(filePath);
         if (revMap[filePath]) {
             return left + revPost(revMap[filePath], true) + (search || '') +
                 right;
